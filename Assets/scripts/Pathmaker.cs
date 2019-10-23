@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // MAZE PROC GEN LAB
 // all students: complete steps 1-6, as listed in this file
@@ -8,31 +10,100 @@ using UnityEngine;
 
 // STEP 1: ======================================================================================
 // put this script on a Sphere... it SHOULD move around, and drop a path of floor tiles behind it
+/// <summary>
+/// done
+/// </summary>
 
 public class Pathmaker : MonoBehaviour {
 
-// STEP 2: ============================================================================================
+
+	
+	
+	
+	
+	// STEP 2: ============================================================================================
 // translate the pseudocode below
 
 //	DECLARE CLASS MEMBER VARIABLES:
 //	Declare a private integer called counter that starts at 0; 		// counter will track how many floor tiles I've instantiated
+	private int counter;//for floor tile
+	private static int globalTileCOUNT;
+	public int CounterMax;
 //	Declare a public Transform called floorPrefab, assign the prefab in inspector;
+	public Transform Floorprefab;//floor
 //	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
+	public Transform pathmakerSpherePrefab;
+	public GameObject pathmakerSpherePrefabOBJECT;//sphere
+	void Start()
+	{
+		CounterMax = Random.Range(50, 100);
+	}
 
 
-	void Update () {
+	void Update ()
+	{
+		Debug.Log("Global COUNTER: " + counter);
+
+		Debug.Log("COUNTER: " + counter);
 //		If counter is less than 50, then:
-//			Generate a random number from 0.0f to 1.0f;
-//			If random number is less than 0.25f, then rotate myself 90 degrees;
-//				... Else if number is 0.25f-0.5f, then rotate myself -90 degrees;
-//				... Else if number is 0.99f-1.0f, then instantiate a pathmakerSpherePrefab clone at my current position;
-//			// end elseIf
+	if(globalTileCOUNT<600)
+	{
+		if (counter < CounterMax)
+		{
 
+			float randomFloat = Random.Range(0.0f, 1.0f);
+			Debug.Log("RandomFloat: " + randomFloat);
+
+//			Generate a random number from 0.0f to 1.0f;
+
+
+			if (randomFloat <= 0.279f)
+			{
+				pathmakerSpherePrefab.Rotate(0, 90, 0);
+				Debug.Log("+90");
+//			If random number is less than 0.25f, then rotate myself 90 degrees;
+
+			}
+
+			else if (randomFloat >= .3f && randomFloat <= 0.6f)
+			{
+				pathmakerSpherePrefab.Rotate(0, -90, 0);
+				Debug.Log("+90");
+
+				//				... Else if number is 0.25f-0.5f, then rotate myself -90 degrees;
+			}
+			else if (randomFloat >= 0.9f && randomFloat <= 1f)
+			{
+				Instantiate(pathmakerSpherePrefab, pathmakerSpherePrefab.transform.position, Quaternion.identity);
+				Debug.Log(".o99-1 WTF");
+				//Instantiate(pathmakerSpherePrefab,??????,Quaternion.identity);
+
+				//				... Else if number is 0.99f-1.0f, then instantiate a pathmakerSpherePrefab clone at my current position;
+			}
+
+//			// end elseIf
+			Debug.Log("TILE PLACED");
+			Instantiate(Floorprefab, pathmakerSpherePrefab.transform.position, Quaternion.identity);
+			counter = counter + 1;
 //			Instantiate a floorPrefab clone at current position;
 //			Move forward ("forward", as in, the direction I'm currently facing) by 5 units;
+			pathmakerSpherePrefab.Translate(Vector3.forward * 5);
+			//pathmakerSpherePrefab.transform.positon + forward(0, 0, 5);
+//z=404ward
 //			Increment counter;
 //		Else:
 //			Destroy my game object; 		// self destruct if I've made enough tiles already
+		}
+
+		globalTileCOUNT = globalTileCOUNT +1;
+	}
+
+	else
+
+	{
+		Destroy(pathmakerSpherePrefabOBJECT);
+		Debug.Log("KA-BOOM");
+	}
 	}
 
 } 
