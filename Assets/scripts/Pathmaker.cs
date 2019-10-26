@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 // MAZE PROC GEN LAB
@@ -29,29 +31,56 @@ public class Pathmaker : MonoBehaviour {
 	private int counter;//for floor tile
 	private static int globalTileCOUNT;
 	public int CounterMax;
+	public int IDKCount;
+	public int TWINXLCount;
+	public int FANDOMCount;
+	
+	
+	
+	public TextMeshPro Meshy;
+
+	public int tileRandom;
+	public int tileTypenum;
 //	Declare a public Transform called floorPrefab, assign the prefab in inspector;
-	public Transform Floorprefab;//floor
+	//public Transform Floorprefab;
+	public Transform idkTileprefab;
+	public bool wasGenerated = false;
+	
+	public Transform Xlprefab;
+	public Transform Fandomprefab;
+	
+	
 //	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
 	public Transform pathmakerSpherePrefab;
 	public GameObject pathmakerSpherePrefabOBJECT;//sphere
 	void Start()
 	{
-		CounterMax = Random.Range(50, 100);
+		CounterMax = Random.Range(50, 300);
+		Meshy.text = " ";
+
 	}
 
 
 	void Update ()
 	{
+		if (Input.GetKey(KeyCode.R)&& wasGenerated == true)
+		{
+			Debug.Log("R Key Pressed");
+			SceneManager.LoadScene("IMadeMySelf");
+		}
+		
 		Debug.Log("Global COUNTER: " + counter);
 
 		Debug.Log("COUNTER: " + counter);
 //		If counter is less than 50, then:
 	if(globalTileCOUNT<600)
 	{
+		
 		if (counter < CounterMax)
 		{
 
 			float randomFloat = Random.Range(0.0f, 1.0f);
+			tileRandom = Random.Range(0, tileTypenum);
 			Debug.Log("RandomFloat: " + randomFloat);
 
 //			Generate a random number from 0.0f to 1.0f;
@@ -82,12 +111,14 @@ public class Pathmaker : MonoBehaviour {
 			}
 
 //			// end elseIf
-			Debug.Log("TILE PLACED");
-			Instantiate(Floorprefab, pathmakerSpherePrefab.transform.position, Quaternion.identity);
+
+			ChooseATile();
+			
+			
 			counter = counter + 1;
 //			Instantiate a floorPrefab clone at current position;
 //			Move forward ("forward", as in, the direction I'm currently facing) by 5 units;
-			pathmakerSpherePrefab.Translate(Vector3.forward * 5);
+			pathmakerSpherePrefab.Translate(Vector3.forward *9);
 			//pathmakerSpherePrefab.transform.positon + forward(0, 0, 5);
 //z=404ward
 //			Increment counter;
@@ -102,11 +133,42 @@ public class Pathmaker : MonoBehaviour {
 
 	{
 		Destroy(pathmakerSpherePrefabOBJECT);
+		//pathmakerSpherePrefabOBJECT.SetActive(false);
 		Debug.Log("KA-BOOM");
+		wasGenerated = true;
+		Meshy.text = "Congratulations. Press the R key to restart.";//There are " + IDKCount + " iDKHOW tiles, " + TWINXLCount +
+		//" TwinXL tiles, and " + FANDOMCount + " Fandom tiles for a total of " + globalTileCOUNT +
+			//" tiles in the scene.
+		
 	}
 	}
 
+	void ChooseATile()
+	{
+		//tileRandom=tileRandom
+		if (tileRandom ==0&&tileRandom<1)
+		{
+			Instantiate(idkTileprefab, pathmakerSpherePrefab.transform.position, Quaternion.identity);
+			Debug.Log("IDK TILE PLACED");
+			IDKCount = IDKCount + 1;
+		}
+		else if (tileRandom==1&&tileRandom<2)
+         		{
+         			Instantiate(Xlprefab, pathmakerSpherePrefab.transform.position, Quaternion.identity);
+         			Debug.Log("XL Tile Placed");
+                    TWINXLCount = TWINXLCount + 1;
+         		}
+		else if (tileRandom==2&&tileRandom<=3)
+		{
+			Instantiate(Fandomprefab, pathmakerSpherePrefab.transform.position, Quaternion.identity);
+			Debug.Log("Fandom Tile Placed");
+			FANDOMCount = FANDOMCount + 1;
+		}
+
+		
+	}
 } 
+
 
 // MORE STEPS BELOW!!!........
 

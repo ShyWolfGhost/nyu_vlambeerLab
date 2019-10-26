@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/IMadeMySelf.unity
+    guid: cde29b39b04d34d39b32a91141ca0fbc
+  m_configObjects: {}
