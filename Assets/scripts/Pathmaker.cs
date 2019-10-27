@@ -29,7 +29,7 @@ public class Pathmaker : MonoBehaviour {
 //	DECLARE CLASS MEMBER VARIABLES:
 //	Declare a private integer called counter that starts at 0; 		// counter will track how many floor tiles I've instantiated
 	private int counter;//for floor tile
-	private static int globalTileCOUNT;
+	public static int globalTileCOUNT;
 	public int CounterMax;
 	public int IDKCount;
 	public int TWINXLCount;
@@ -63,12 +63,12 @@ public class Pathmaker : MonoBehaviour {
 
 	void Update ()
 	{
-		if (Input.GetKey(KeyCode.R)&& wasGenerated == true)
+		/*if (Input.GetKey(KeyCode.R)&& wasGenerated == true)
 		{
 			Debug.Log("R Key Pressed");
 			SceneManager.LoadScene("IMadeMySelf");
 		}
-		
+		*/
 		Debug.Log("Global COUNTER: " + counter);
 
 		Debug.Log("COUNTER: " + counter);
@@ -135,8 +135,8 @@ public class Pathmaker : MonoBehaviour {
 		Destroy(pathmakerSpherePrefabOBJECT);
 		//pathmakerSpherePrefabOBJECT.SetActive(false);
 		Debug.Log("KA-BOOM");
-		wasGenerated = true;
-		Meshy.text = "Congratulations. Press the R key to restart.";//There are " + IDKCount + " iDKHOW tiles, " + TWINXLCount +
+		//wasGenerated = true;
+		//Meshy.text = "Congratulations. Press the R key to restart.";//There are " + IDKCount + " iDKHOW tiles, " + TWINXLCount +
 		//" TwinXL tiles, and " + FANDOMCount + " Fandom tiles for a total of " + globalTileCOUNT +
 			//" tiles in the scene.
 		

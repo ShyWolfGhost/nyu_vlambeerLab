@@ -123,7 +123,8 @@ MonoBehaviour:
   wasGenerated: 0
   Xlprefab: {fileID: 4117571674708208667, guid: a5c0dc594ea4749018e7228bd66fab41,
     type: 3}
-  Fandomprefab: {fileID: 0}
+  Fandomprefab: {fileID: 1759990857004074496, guid: 7cc6aef33b4aa482cac6c69fec55a352,
+    type: 3}
   pathmakerSpherePrefab: {fileID: 5085255842885313612}
   pathmakerSpherePrefabOBJECT: {fileID: 5085255842885313618}
 --- !u!222 &5085255842885313613
